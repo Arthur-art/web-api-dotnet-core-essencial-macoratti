@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-api-catalog", "web-api-catalog\web-api-catalog.csproj", "{9435A6EC-9FBD-48EF-B182-C5C014DF41F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9435A6EC-9FBD-48EF-B182-C5C014DF41F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9435A6EC-9FBD-48EF-B182-C5C014DF41F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9435A6EC-9FBD-48EF-B182-C5C014DF41F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9435A6EC-9FBD-48EF-B182-C5C014DF41F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51C21A5F-54E3-4556-A635-EFDF5AE332DD}
+	EndGlobalSection
+EndGlobal
