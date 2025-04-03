@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 using web_api_catalog.Context;
 
 var builder = WebApplication.CreateBuilder(args);
