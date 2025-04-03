@@ -15,4 +15,8 @@ public class Product
     public float Rating { get; set; }
 
     public DateTime DateOfRegistration { get; set; }
+
+    public int CategoryId { get; set; }
+
+    public Category? Category { get; set; }
 }
