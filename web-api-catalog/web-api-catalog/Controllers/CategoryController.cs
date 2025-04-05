@@ -16,7 +16,7 @@ public class CategoryController : ControllerBase
 
     [HttpGet]
     [Route("api/[controller]/listcategories")]
-    public ActionResult Get()
+    public ActionResult<IEnumerable<Category>> Get()
     {
         var categories = _context.categories.ToList();
         
@@ -39,6 +39,20 @@ public class CategoryController : ControllerBase
         }
 
         return Ok(category);
+    }
+
+    [HttpGet("api/[controller]/listproductsbycategoryid/{id:int}")]
+    public ActionResult<IEnumerable<Category>> GetProductsByCategoryId(int id)
+    {
+        var category = _context.categories.FirstOrDefault(x => x.CategoryId == id);
+        var products = _context.categories.Include(x => x.Products).FirstOrDefault(x => x.CategoryId == id);
+
+        if (category is null)
+        {
+            return NotFound("Category is not found");
+        }
+
+        return Ok(products);
     }
 
     [HttpPost("api/[controller]/addcategory")]
@@ -70,5 +84,21 @@ public class CategoryController : ControllerBase
         _context.SaveChanges();
 
         return Ok(category);
+    }
+
+    [HttpDelete("api/[controller]/deletecategory/{id:int}")]
+    public ActionResult Delete(int id)
+    {
+        var categoryExist = _context.categories.FirstOrDefault(x => x.CategoryId == id);
+
+        if (categoryExist is null)
+        {
+            return NotFound("Category is not found");
+        }
+
+        _context.categories.Remove(categoryExist);
+        _context.SaveChanges();
+
+        return Ok(categoryExist);
     }
 }
