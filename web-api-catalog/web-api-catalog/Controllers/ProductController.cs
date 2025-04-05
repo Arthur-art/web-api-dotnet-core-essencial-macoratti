@@ -40,7 +40,7 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [Route("api/[controller]/add/product")]
-    public ActionResult Post(Product product)
+    public ActionResult Post([FromBody]Product product)
     {
         if (product is null)
         {
@@ -63,9 +63,26 @@ public class ProductController : ControllerBase
             return BadRequest("Product is not found");
         }
 
-        _context.Entry(product).State = EntityState.Modified;
+        _context.Attach(product);
+        _context.Update(product);
         _context.SaveChanges();
 
         return Ok();
+    }
+
+    [HttpDelete("api/[controller]/delete/product/{id:int}")]
+    public ActionResult Delete(int id)
+    {
+        var productExist = _context.products.FirstOrDefault(x => x.ProductId == id);
+
+        if(productExist is null)
+        {
+            return NotFound("Product is not found");
+        }
+
+        _context.products.Remove(productExist);
+        _context.SaveChanges();
+
+        return Ok("Product is deleted");
     }
 }
