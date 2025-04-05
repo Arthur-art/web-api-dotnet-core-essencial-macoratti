@@ -52,4 +52,20 @@ public class ProductController : ControllerBase
 
         return new CreatedAtRouteResult("Product", new {id = product.ProductId}, product);
     }
+
+    [HttpPut("api/[controller]/update/product/{id:int}")]
+    public ActionResult Put([FromRoute] int id, [FromBody]Product product) 
+    {
+        var productExist = _context.products.AsNoTracking().FirstOrDefault(x => x.ProductId == id);
+
+        if(productExist == null)
+        {
+            return BadRequest("Product is not found");
+        }
+
+        _context.Entry(product).State = EntityState.Modified;
+        _context.SaveChanges();
+
+        return Ok();
+    }
 }
