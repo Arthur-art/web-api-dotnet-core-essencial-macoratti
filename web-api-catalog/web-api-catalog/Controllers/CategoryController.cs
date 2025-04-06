@@ -16,9 +16,9 @@ public class CategoryController : ControllerBase
 
     [HttpGet]
     [Route("api/[controller]/listcategories")]
-    public ActionResult<IEnumerable<Category>> Get()
+    public async Task<ActionResult<IEnumerable<Category>>> GetAsync()
     {
-        var categories = _context.categories.AsNoTracking().ToList();
+        var categories = await _context.categories.AsNoTracking().ToListAsync();
         
         if(categories is null)
         {
