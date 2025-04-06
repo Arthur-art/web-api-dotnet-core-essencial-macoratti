@@ -1,5 +1,8 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using web_api_catalog.Context;
+using web_api_catalog.Validators;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,10 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
     });
+
+builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<ProductValidator>();
+builder.Services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<CategoryValidator>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();

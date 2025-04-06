@@ -12,6 +12,17 @@ public class Category
         Products = new Collection<Product>();
     }
 
+    public Category(int categoryId)
+    {
+        CategoryId = categoryId;
+    }
+
+    public Category(string? nome, string? imagemUrl)
+    {
+        Nome = nome;
+        ImagemUrl = imagemUrl;
+    }
+
     [Key]
     public int CategoryId { get; set; }
     [Required]

@@ -6,11 +6,27 @@ namespace web_api_catalog.Models;
 [Table("Products")]
 public class Product
 {
+    public Product()
+    {
+        
+    }
+    public Product(int productId, string? name, string? description, decimal price, string? imageUrl, float rating, DateTime dateOfRegistration, int categoryId)
+    {
+        ProductId = productId;
+        Name = name;
+        Description = description;
+        Price = price;
+        ImageUrl = imageUrl;
+        Rating = rating;
+        DateOfRegistration = dateOfRegistration;
+        CategoryId = categoryId;
+    }
+
     [Key]
     public int ProductId { get; set; }
 
-    [Required]
-    [StringLength(80)]
+    [Required(ErrorMessage = "O Nome do produto é obrigatório.")]
+    [StringLength(80, ErrorMessage = "O produto deve ter no máximo 80 caracteres.")]
     public string? Name { get; set; }
 
     [Required]

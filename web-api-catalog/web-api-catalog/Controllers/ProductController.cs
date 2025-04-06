@@ -5,6 +5,7 @@ using web_api_catalog.Models;
 
 namespace web_api_catalog.Controllers;
 
+[ApiController]
 public class ProductController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -47,14 +48,25 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [Route("api/[controller]/add/product")]
-    public ActionResult Post([FromBody]Product product)
+    public ActionResult Post([FromBody] ProductDto product)
     {
         if (product is null)
         {
             return BadRequest();
         }
 
-        _context.products.Add(product);
+        var productPayload = new Product(
+              product.ProductId,
+              product.Name,
+              product.Description,
+              product.Price,
+              product.ImageUrl,
+              product.Rating,
+              product.DateOfRegistration,
+              product.CategoryId
+            );
+
+        _context.products.Add(productPayload);
         _context.SaveChanges();
 
         return new CreatedAtRouteResult("Product", new {id = product.ProductId}, product);
