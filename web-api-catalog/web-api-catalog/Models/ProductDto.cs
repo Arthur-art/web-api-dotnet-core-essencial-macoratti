@@ -8,19 +8,19 @@ public class ProductDto
 
     public int ProductId { get; set; }
 
-    [Required(ErrorMessage = "O Nome do produto é obrigatório.")]
-    [StringLength(80, ErrorMessage = "O produto deve ter no máximo 80 caracteres.")]
+    /*[Required(ErrorMessage = "O Nome do produto é obrigatório.")]
+    [StringLength(80, ErrorMessage = "O produto deve ter no máximo 80 caracteres.")]*/
     public string? Name { get; set; }
 
     [Required]
     [StringLength(300)]
     public string? Description { get; set; }
 
-    [Required]
-    [Column(TypeName = "decimal(10,2)")]
+    /*[Required(ErrorMessage = "O preço do produto é obrigatório.")]
+    [Range(0.01,9999.99, ErrorMessage = "O preço deve conter no minimo 3 caracteres.")]*/
     public decimal Price { get; set; }
 
-    [Required]
+    /*[Required(ErrorMessage = "A imagem do produto é obrigatório.")]*/
     [StringLength(300)]
     public string? ImageUrl { get; set; }
 

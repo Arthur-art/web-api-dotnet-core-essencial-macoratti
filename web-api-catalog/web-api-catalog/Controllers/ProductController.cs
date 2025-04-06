@@ -55,11 +55,6 @@ public class ProductController : ControllerBase
             return BadRequest();
         }
 
-        /*if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }*/
-
         var productPayload = new Product(
               product.ProductId,
               product.Name,

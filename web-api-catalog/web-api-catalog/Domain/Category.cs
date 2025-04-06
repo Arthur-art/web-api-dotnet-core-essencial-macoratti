@@ -12,9 +12,15 @@ public class Category
         Products = new Collection<Product>();
     }
 
-    public Category(int categoryId, string v1, string v2)
+    public Category(int categoryId)
     {
         CategoryId = categoryId;
+    }
+
+    public Category(string? nome, string? imagemUrl)
+    {
+        Nome = nome;
+        ImagemUrl = imagemUrl;
     }
 
     [Key]

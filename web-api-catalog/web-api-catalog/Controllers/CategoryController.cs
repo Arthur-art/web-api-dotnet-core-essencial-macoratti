@@ -4,6 +4,8 @@ using web_api_catalog.Context;
 using web_api_catalog.Models;
 
 namespace web_api_catalog.Controllers;
+
+[ApiController]
 public class CategoryController : ControllerBase
 {
 
@@ -56,14 +58,16 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost("api/[controller]/addcategory")]
-    public ActionResult Create([FromBody] Category category)
+    public ActionResult Create([FromBody] CategoryDto category)
     {
         if(category is null)
         {
             return BadRequest();
         }
 
-        _context.categories.Add(category);
+        var categoryPayload = new Category(category.Nome, category.ImagemUrl);
+
+        _context.categories.Add(categoryPayload);
         _context.SaveChanges();
 
         return Ok(category);
