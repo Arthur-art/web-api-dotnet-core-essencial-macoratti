@@ -12,6 +12,11 @@ public class Category
         Products = new Collection<Product>();
     }
 
+    public Category(int categoryId, string v1, string v2)
+    {
+        CategoryId = categoryId;
+    }
+
     [Key]
     public int CategoryId { get; set; }
     [Required]

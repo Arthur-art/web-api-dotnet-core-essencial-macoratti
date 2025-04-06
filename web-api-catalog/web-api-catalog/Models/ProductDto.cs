@@ -1,28 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace web_api_catalog.Models;
 
-[Table("Products")]
-public class Product
+public class ProductDto
 {
-    public Product()
-    {
-        
-    }
-    public Product(int productId, string? name, string? description, decimal price, string? imageUrl, float rating, DateTime dateOfRegistration, int categoryId)
-    {
-        ProductId = productId;
-        Name = name;
-        Description = description;
-        Price = price;
-        ImageUrl = imageUrl;
-        Rating = rating;
-        DateOfRegistration = dateOfRegistration;
-        CategoryId = categoryId;
-    }
 
-    [Key]
     public int ProductId { get; set; }
 
     [Required(ErrorMessage = "O Nome do produto é obrigatório.")]
@@ -46,6 +29,4 @@ public class Product
     public DateTime DateOfRegistration { get; set; }
 
     public int CategoryId { get; set; }
-
-    public Category? Category { get; set; }
 }
