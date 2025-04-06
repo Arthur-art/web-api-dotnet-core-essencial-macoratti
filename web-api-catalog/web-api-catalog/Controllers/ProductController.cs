@@ -16,22 +16,29 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [Route("api/[controller]")]
-    public ActionResult<IEnumerable<Product>> Get()
+    public ActionResult<IEnumerable<Product>> Get([FromQuery]int pageSize = 0)
     {
 
-        var products = _context.products.ToList();
-        if (products == null || !products.Any())
+        try
         {
-            return NotFound("No products found.");
+            var products = _context.products.Take(pageSize).AsNoTracking().ToList();
+            if (products == null || !products.Any())
+            {
+                return NotFound("No products found.");
+            }
+            return products;
         }
-        return products;
+        catch(Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro interno");
+        }
     }
 
     [HttpGet]
     [Route("api/[controller]/{id:int}", Name = "Product")]
-    public ActionResult<Product> Get(int id)
+    public ActionResult<Product> GetById(int id)
     {
-        var product = _context.products.FirstOrDefault( x=> x.ProductId == id);
+        var product = _context.products.AsNoTracking().FirstOrDefault( x=> x.ProductId == id);
         if (product == null) {
             return NotFound("Product is not found");
         }

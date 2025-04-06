@@ -18,7 +18,7 @@ public class CategoryController : ControllerBase
     [Route("api/[controller]/listcategories")]
     public ActionResult<IEnumerable<Category>> Get()
     {
-        var categories = _context.categories.ToList();
+        var categories = _context.categories.AsNoTracking().ToList();
         
         if(categories is null)
         {
@@ -31,7 +31,7 @@ public class CategoryController : ControllerBase
     [HttpGet("api/[controller]/listcategoriebyid/{id:int}")]
     public ActionResult GetById(int id)
     {
-        var category = _context.categories.FirstOrDefault(x => x.CategoryId == id);
+        var category = _context.categories.AsNoTracking().FirstOrDefault(x => x.CategoryId == id);
 
         if(category is null)
         {
@@ -44,8 +44,8 @@ public class CategoryController : ControllerBase
     [HttpGet("api/[controller]/listproductsbycategoryid/{id:int}")]
     public ActionResult<IEnumerable<Category>> GetProductsByCategoryId(int id)
     {
-        var category = _context.categories.FirstOrDefault(x => x.CategoryId == id);
-        var products = _context.categories.Include(x => x.Products).FirstOrDefault(x => x.CategoryId == id);
+        var category = _context.categories.AsNoTracking().FirstOrDefault(x => x.CategoryId == id);
+        var products = _context.categories.Include(x => x.Products).AsNoTracking().FirstOrDefault(x => x.CategoryId == id);
 
         if (category is null)
         {
