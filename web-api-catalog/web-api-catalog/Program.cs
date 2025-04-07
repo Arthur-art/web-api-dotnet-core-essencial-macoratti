@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using web_api_catalog.Context;
 using web_api_catalog.Validators;
 using FluentValidation;
+using web_api_catalog.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,12 +27,13 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlCon
 
 var app = builder.Build();
 
-/* Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}*/
+    app.ConfigureExcepetionHandler();
+  /*app.UseSwagger();
+    app.UseSwaggerUI();*/
+}
 
 app.UseHttpsRedirection();
 

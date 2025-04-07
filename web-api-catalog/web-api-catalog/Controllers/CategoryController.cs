@@ -33,6 +33,7 @@ public class CategoryController : ControllerBase
     [HttpGet("api/[controller]/listcategoriebyid/{id:int}")]
     public ActionResult GetById(int id)
     {
+        //throw new Exception("Validando middleware de tratamento de errors");
         var category = _context.categories.AsNoTracking().FirstOrDefault(x => x.CategoryId == id);
 
         if(category is null)
