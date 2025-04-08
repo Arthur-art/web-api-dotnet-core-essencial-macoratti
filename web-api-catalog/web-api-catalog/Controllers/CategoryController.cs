@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using web_api_catalog.Context;
+using web_api_catalog.Filters;
 using web_api_catalog.Models;
 
 namespace web_api_catalog.Controllers;
@@ -17,6 +18,7 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
+    [ServiceFilter(typeof(ApiLoggingFilter))]
     [Route("api/[controller]/listcategories")]
     public async Task<ActionResult<IEnumerable<Category>>> GetAsync()
     {
@@ -33,6 +35,7 @@ public class CategoryController : ControllerBase
     [HttpGet("api/[controller]/listcategoriebyid/{id:int}")]
     public ActionResult GetById(int id)
     {
+        //throw new Exception("Validando middleware de tratamento de errors");
         var category = _context.categories.AsNoTracking().FirstOrDefault(x => x.CategoryId == id);
 
         if(category is null)

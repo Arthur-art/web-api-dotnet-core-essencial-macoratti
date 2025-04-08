@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace web_api_catalog.Models;
+﻿namespace web_api_catalog.Models;
 
 public class CategoryDto
 {

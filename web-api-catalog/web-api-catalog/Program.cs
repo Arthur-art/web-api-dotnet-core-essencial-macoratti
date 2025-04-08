@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using web_api_catalog.Context;
 using web_api_catalog.Validators;
 using FluentValidation;
+using web_api_catalog.Extensions;
+using web_api_catalog.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,14 +26,17 @@ builder.Services.AddEndpointsApiExplorer();
 string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
+builder.Services.AddScoped<ApiLoggingFilter>();
+
 var app = builder.Build();
 
-/* Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}*/
+    app.ConfigureExcepetionHandler();
+  /*app.UseSwagger();
+    app.UseSwaggerUI();*/
+}
 
 app.UseHttpsRedirection();
 
