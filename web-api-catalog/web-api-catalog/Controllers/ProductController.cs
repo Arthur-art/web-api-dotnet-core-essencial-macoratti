@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using web_api_catalog.Context;
+using web_api_catalog.Filters;
 using web_api_catalog.Models;
 
 namespace web_api_catalog.Controllers;
@@ -17,6 +18,7 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [Route("api/[controller]")]
+    [ServiceFilter(typeof(ApiLoggingFilter))]
     public ActionResult<IEnumerable<Product>> Get([FromQuery]int pageSize = 0)
     {
 
